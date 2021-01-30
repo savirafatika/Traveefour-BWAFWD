@@ -1,0 +1,9 @@
+@mixin btnPrimary {
+   background-color: $secondaryColor;
+   color: #fff;
+
+   &:hover {
+      background-color: #FFAA69;
+      color: #fff;
+   }
+}
