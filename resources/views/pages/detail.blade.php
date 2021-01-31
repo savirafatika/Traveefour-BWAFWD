@@ -73,7 +73,7 @@
                             <div class="col-md-4 border-end">
                                 <img src="frontend/images/ic_language.png" alt="icon language" class="features-image">
                                 <h3>Language</h3>
-                                <p>Bahasa Indonesis</p>
+                                <p>Bahasa Indonesia</p>
                             </div>
                             <div class="col-md-4">
                                 <img src="frontend/images/ic_food.png" alt="icon foods" class="features-image">
