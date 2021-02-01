@@ -23,62 +23,51 @@
             <div class="row">
                 <div class="col-lg-8 pl-lg-0">
                     <div class="card card-details">
-                        <h1>Bromo, Jatim</h1>
-                        <p>Republic of Indonesia Raya</p>
+                        <h1>{{ $item->title }}</h1>
+                        <p>{{ $item->location }}</p>
+
+                        @if ($item->galleries->count())
                         <div class="gallery">
                             <div class="xzoom-container">
-                                <img src="frontend/images/d1.jpg" class="xzoom" id="main_image"
-                                    xoriginal="frontend/images/d1.jpg" width="100">
+                                <img src="{{ Storage::url($item->galleries->first()->image) }}" class="xzoom"
+                                    id="main_image" xoriginal="{{ Storage::url($item->galleries->first()->image) }}"
+                                    width="100">
                             </div>
                             <div class="xzoom-thumbs">
-                                <a href="frontend/images/d1.jpg">
-                                    <img src="frontend/images/d1.jpg" class="xzoom-gallery" width="128"
-                                        xpreview="frontend/images/d1.jpg">
+                                @foreach ($item->galleries as $gallery)
+                                <a href="{{ Storage::url($gallery->image) }}">
+                                    <img src="{{ Storage::url($gallery->image) }}" class="xzoom-gallery" width="128"
+                                        xpreview="{{ Storage::url($gallery->image) }}">
                                 </a>
-                                <a href="frontend/images/d2.jpg">
-                                    <img src="frontend/images/d2.jpg" class="xzoom-gallery" width="128"
-                                        xpreview="frontend/images/d2.jpg">
-                                </a>
-                                <a href="frontend/images/d3.jpg">
-                                    <img src="frontend/images/d3.jpg" class="xzoom-gallery" width="128"
-                                        xpreview="frontend/images/d3.jpg">
-                                </a>
-                                <a href="frontend/images/d4.jpg">
-                                    <img src="frontend/images/d4.jpg" class="xzoom-gallery" width="128"
-                                        xpreview="frontend/images/d4.jpg">
-                                </a>
-                                <a href="frontend/images/d5.jpg">
-                                    <img src="frontend/images/d5.jpg" class="xzoom-gallery" width="128"
-                                        xpreview="frontend/images/d5.jpg">
-                                </a>
+                                @endforeach
                             </div>
                         </div>
+                        @endif
+
                         <h2>About Destination</h2>
-                        <p>Mount Bromo (Indonesian: Gunung Bromo), is an active volcano and part of the Tengger
-                            massif, in East Java, Indonesia. At 2,329 meters (7,641 ft) it is not the highest peak
-                            of the
-                            massif, but is the best known. The massif area is one of the most visited tourist
-                            attractions
-                            in East Java, Indonesia.</p>
-                        <p>The volcano belongs to the Bromo Tengger Semeru National Park. The name of Bromo
-                            derived from Javanese pronunciation of Brahma, the Hindu creator god.</p>
+                        <p>
+                            {!! $item->about !!}
+                        </p>
                         <div class="features row">
                             <div class="col-md-4 border-end">
-                                <img src="frontend/images/ic_event.png" alt="icon event" class="features-image">
+                                <img src="{{ url('frontend/images/ic_event.png') }}" alt="icon event"
+                                    class="features-image">
                                 <div class="description">
                                     <h3>Featured Event</h3>
-                                    <p>Upacara Kasodo</p>
+                                    <p>{{ $item->featured_event }}</p>
                                 </div>
                             </div>
                             <div class="col-md-4 border-end">
-                                <img src="frontend/images/ic_language.png" alt="icon language" class="features-image">
+                                <img src="{{ url('frontend/images/ic_language.png') }}" alt="icon language"
+                                    class="features-image">
                                 <h3>Language</h3>
-                                <p>Bahasa Indonesia</p>
+                                <p>{{ $item->language }}</p>
                             </div>
                             <div class="col-md-4">
-                                <img src="frontend/images/ic_food.png" alt="icon foods" class="features-image">
+                                <img src="{{ url('frontend/images/ic_food.png') }}" alt="icon foods"
+                                    class="features-image">
                                 <h3>Foods</h3>
-                                <p>Local Foods</p>
+                                <p>{{ $item->foods }}</p>
                             </div>
                         </div>
                     </div>
@@ -98,24 +87,38 @@
                         <table class="trip-informations">
                             <tr>
                                 <th width="50%">Date of Departure</th>
-                                <td width="50%" class="text-right">1 Feb, 2021</td>
+                                <td width="50%" class="text-right">
+                                    {{ \Carbon\Carbon::create($item->date_of_departure)->format('F n, Y') }}
+                                </td>
                             </tr>
                             <tr>
                                 <th width="50%">Duration</th>
-                                <td width="50%" class="text-right">4D 3N</td>
+                                <td width="50%" class="text-right">{{ $item->duration }}</td>
                             </tr>
                             <tr>
                                 <th width="50%">Type of Trip</th>
-                                <td width="50%" class="text-right">Open Public</td>
+                                <td width="50%" class="text-right">{{ $item->type }}</td>
                             </tr>
                             <tr>
                                 <th width="50%">Price</th>
-                                <td width="50%" class="text-right">$80,00/person</td>
+                                <td width="50%" class="text-right">${{ $item->price }},00/person</td>
                             </tr>
                         </table>
                     </div>
                     <div class="join-container">
-                        <a href="{{ route('checkout') }}" class="btn btn-block btn-join-now mt-3 py-2">Join Now</a>
+                        @auth
+                        <form action="{{ route('checkout_process', $item->id) }}" method="POST">
+                            @csrf
+                            <button class="btn btn-block btn-join-now mt-3 py-2" type="submit">
+                                Join Now
+                            </button>
+                        </form>
+                        @endauth
+                        @guest
+                        <a href="{{ route('login') }}" class="btn btn-block btn-join-now mt-3 py-2">
+                            Login or Register to Join
+                        </a>
+                        @endguest
                     </div>
                 </div>
             </div>
