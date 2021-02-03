@@ -177,38 +177,14 @@
                         </table>
                         <hr>
                         <h2>Payments Instructions</h2>
-                        <p class="payment-instructions">Please complete the payment before you continue the trip</p>
-                        <div class="bank">
-                            <div class="bank-item pb-3">
-                                <img src="{{ url('frontend/images/ic_bank.png') }}" class="bank-image">
-                                <div class="description">
-                                    <h3 class="note">PT Traveefour ID</h3>
-                                    <p>
-                                        0881 8829 8800
-                                        <br>
-                                        Bank Central Asia
-                                    </p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="bank-item pb-3">
-                                <img src="{{ url('frontend/images/ic_bank.png') }}" class="bank-image">
-                                <div class="description">
-                                    <h3 class="note">PT Traveefour ID</h3>
-                                    <p>
-                                        0899 8501 7888
-                                        <br>
-                                        Bank HSBC
-                                    </p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
+                        <p class="payment-instructions">
+                            You will be redirected to another page to pay using GO-PAY
+                        </p>
+                        <img src="{{ url('frontend/images/logo-gopay.png') }}" class="w-50">
                     </div>
                     <div class="join-container">
                         <a href="{{ route('checkout-success', $item->id) }}"
-                            class="btn btn-block btn-join-now mt-3 py-2">I Have
-                            Made Payment</a>
+                            class="btn btn-block btn-join-now mt-3 py-2">Process Payment</a>
                     </div>
                     <div class="text-center mt-3">
                         <a href="{{ route('detail', $item->travel_package->slug) }}" class="text-muted">Cancel
