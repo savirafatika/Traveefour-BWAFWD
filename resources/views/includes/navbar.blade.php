@@ -14,10 +14,10 @@
             <div class="collapse navbar-collapse justify-content-end" id="navb">
                 <ul class="navbar-nav ml-auto mr-3">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Travel Package</a>
+                        <a class="nav-link" href="#popular">Travel Package</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -31,7 +31,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Testimonial</a>
+                        <a class="nav-link" href="#testimonialHeading">Testimonial</a>
                     </li>
                 </ul>
 
